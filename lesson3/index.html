@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Lesson 3: Using JSX w/React</title>
+</head>
+<body>
+
+<div id="root"></div>
+<!-- use raw React API -->
+<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+<!-- use Babel standalone -->
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+<script type="text/babel">
+	const rootElement = document.getElementById('root');
+	// const element = React.createElement('div', {
+	// 	className: 'container',
+	// 	children: 'Hello World'
+	// });
+	const content = 'Hello World';
+	const myClassName = 'container';
+	const props = {
+		className: 'container',
+		children: 'Hello World'
+	}
+	const element = <div {...props} className="my-class" />
+
+	ReactDOM.render(element, rootElement);
+</script>
+
+</body>
+</html>

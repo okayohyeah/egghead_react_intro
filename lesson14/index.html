@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>Lesson 14: Make Basic Forms with React</title>
+</head>
+<body>
+
+<div id="root"></div>
+<!-- use raw React API -->
+<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+<!-- use PropTypes package to validate props passed to components
+		 Good for development. PropTypes not used in production-->
+<script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+<!-- use Babel standalone -->
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+<script type="text/babel">
+
+class NameForm extends React.Component {
+	handleSubmit = event => {
+		event.preventDefault();
+		console.log({target: event.target});
+		console.log(event.target[0].value);
+		console.log(event.target.elements.username.value);
+		console.log(this.inputNode.value);
+	}
+
+	render() {
+		return (
+			<form onSubmit={this.handleSubmit}>
+				<label>
+					Name:
+					<input type="text" name="username" ref={node => this.inputNode = node}/>
+				</label>
+				<button type="submit">Submit</button>
+			</form>
+		)
+	}
+}
+
+ReactDOM.render(<NameForm />, document.getElementById('root'));
+</script>
+</body>
+</html>

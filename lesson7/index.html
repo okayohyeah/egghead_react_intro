@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Lesson 7: Rerender a React Application</title>
+</head>
+<body>
+
+<div id="root"></div>
+<!-- use raw React API -->
+<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+<!-- use PropTypes package to validate props passed to components
+		 Good for development. PropTypes not used in production-->
+<script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+<!-- use Babel standalone -->
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+<script type="text/babel">
+	const rootElement = document.getElementById('root');
+	function tick() {
+		const time = new Date().toLocaleTimeString();
+		const element = (
+			<div>
+				It is 
+				<input value={time} />
+				<input value={time} />
+			</div>
+		)
+		ReactDOM.render(element, rootElement);
+	}
+	tick();
+	// Every 1000th millisecond, it tick will update
+	setInterval(tick, 1000);
+
+</script>
+
+</body>
+</html>

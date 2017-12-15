@@ -1,0 +1,66 @@
+<html>
+<head>
+	<title>Lesson 15: Make Dynamic Forms with React</title>
+</head>
+<body>
+
+<div id="root"></div>
+<!-- use raw React API -->
+<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+<!-- use PropTypes package to validate props passed to components
+		 Good for development. PropTypes not used in production-->
+<script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+<!-- use Babel standalone -->
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+<script type="text/babel">
+
+class NameForm extends React.Component {
+	state = {error: this.props.getErrorMessage('')};
+	handleSubmit = event => {
+		event.preventDefault();
+		const value = event.target.elements.username.value;
+		const error = this.props.getErrorMessage(value, );
+		if (error) {
+			alert(`error: ${error}`)
+		} else {
+			alert(`success: ${value}`)
+		}
+	}
+
+	handleChange = (event) => {
+		const {value} = event.target;
+		this.setState({
+			error: this.props.getErrorMessage(value),
+		})
+	}
+
+	render() {
+		const {error} = this.state;
+		return (
+			<form onSubmit={this.handleSubmit}>
+				<label>
+					Name:
+					<input type="text" onChange={this.handleChange} name="username" />
+				</label>
+				{error ? <div style={{color: 'red'}}>{error}</div> : null}
+				<button disabled={Boolean(error)} type="submit">Submit</button>
+			</form>
+		)
+	}
+}
+
+ReactDOM.render(<NameForm 
+		getErrorMessage={value => {
+			if (value.length < 3) {
+				return `Value must be at least 3 characters , but it only has ` + value.length
+			} 
+			if (!value.includes('s')) {
+				return `Value does not include an "s" but it should include an "s"`
+			}
+			return null
+		}} />, document.getElementById('root'));
+</script>
+</body>
+</html>

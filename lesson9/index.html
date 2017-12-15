@@ -1,0 +1,62 @@
+<html>
+<head>
+	<title>Lesson 9: Use Event Handlers with React</title>
+	<meta charset='utf-8'/>
+</head>
+<body>
+
+<div id="root"></div>
+<!-- use raw React API -->
+<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+<!-- use PropTypes package to validate props passed to components
+		 Good for development. PropTypes not used in production-->
+<script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+<!-- use Babel standalone -->
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+<script type="text/babel">
+
+const state = {eventCount: 0, username: ''};
+
+function App() {
+	return (
+		<div>
+			<p>There have been {state.eventCount} events</p>
+
+			<p><button onClick={increment}>Click</button></p>
+
+			<p>You typed: {state.username}</p>
+
+			<p><input onChange={updateUsername}/></p>
+		</div>
+		)
+}
+
+function increment() { 
+	setState({
+		eventCount: state.eventCount + 1
+	})
+}
+
+function updateUsername(event) {
+	// console.log(event);
+	setState({
+	 	username: event.target.value
+	})
+}
+
+function setState(newState) {
+	Object.assign(state, newState);
+	renderApp();
+}
+
+function renderApp() {
+	ReactDOM.render(
+		<App />, document.getElementById('root')
+	)
+}
+
+renderApp();
+</script>
+</body>
+</html>
